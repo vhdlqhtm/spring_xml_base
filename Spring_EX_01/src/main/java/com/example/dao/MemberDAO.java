@@ -1,0 +1,16 @@
+package com.example.dao;
+ 
+import java.util.List;
+
+import com.example.dto.DkLogin;
+import com.example.dto.MemberVO;
+ 
+public interface MemberDAO {
+    
+	public List<MemberVO> selectMember() throws Exception;
+
+	public void accountRegister(MemberVO vo);
+
+	public int memberLogin(MemberVO vo);
+
+}

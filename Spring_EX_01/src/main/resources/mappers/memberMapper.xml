@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.example.mapper.memberMapper">
+ 
+    <!-- 
+        mybatis-config.xml의 typeAlias에 등록해두지 않았다면 
+        
+        <select id="selectMember" resultType="com.example.dto.MemberVO" >
+            SELECT ID, PW ,NAME FROM TEST
+        </select>
+        
+        이렇게 해야 한다.
+    -->
+    
+	<!-- <![CDATA[
+	===========================================================
+	= 회원정보 조회
+	===========================================================
+	]]> -->
+    <select id="selectMember" resultType="memberVO">
+        SELECT member_id, member_pw, member_name FROM DK_MEMBER
+    </select>
+    
+    <!-- <![CDATA[
+	===========================================================
+	= 회원가입
+	===========================================================
+	]]> -->
+	<insert id="accountRegister">
+		INSERT INTO DK_MEMBER
+    (member_id
+    ,member_pw
+    ,member_name)
+VALUES
+	(
+	#{member_id}
+	,#{member_pw}
+	,#{member_name}
+	) 
+	</insert>
+	
+	<!-- <![CDATA[
+	===========================================================
+	= 로그인
+	===========================================================
+	]]> --> 
+	<!-- resultType은 해당 값으로 리턴해주는것임 현재 intger니까 숫자형으로! -->
+	<select id="memberLogin" resultType="Integer">
+	SELECT COUNT(*) cnt
+	FROM DK_MEMBER
+	WHERE member_id = #{member_id}
+	AND member_pw = #{member_pw}
+	</select>   
+</mapper>
